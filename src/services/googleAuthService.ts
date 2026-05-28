@@ -3,7 +3,11 @@ import type { AuthUser } from '../models/AuthUser';
 const STORAGE_KEY = 'hw13-google-user';
 
 export function getGoogleClientId(): string {
-  return window.__APP_CONFIG__?.GOOGLE_CLIENT_ID || import.meta.env.VITE_GOOGLE_CLIENT_ID || '';
+  return (
+    window.__APP_CONFIG__?.GOOGLE_CLIENT_ID?.trim() ||
+    import.meta.env.VITE_GOOGLE_CLIENT_ID?.trim() ||
+    ''
+  );
 }
 
 export function getStoredUser(): AuthUser | null {
@@ -32,8 +36,12 @@ export function clearUser(): void {
 export function readUserFromCredential(credential: string): AuthUser {
   const [, payload] = credential.split('.');
   const normalizedPayload = payload.replace(/-/g, '+').replace(/_/g, '/');
+  const paddedPayload = normalizedPayload.padEnd(
+    normalizedPayload.length + ((4 - (normalizedPayload.length % 4)) % 4),
+    '=',
+  );
   const decodedPayload = decodeURIComponent(
-    atob(normalizedPayload)
+    atob(paddedPayload)
       .split('')
       .map((character) => `%${(`00${character.charCodeAt(0).toString(16)}`).slice(-2)}`)
       .join(''),

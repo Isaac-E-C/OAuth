@@ -50,5 +50,5 @@ export default function LoginController() {
     return <Navigate to="/menu" replace />;
   }
 
-  return <LoginView clientId={clientId} googleButtonRef={googleButtonRef} />;
+  return <LoginView clientId={clientId} scriptReady={scriptReady} googleButtonRef={googleButtonRef} />;
 }

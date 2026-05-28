@@ -13,4 +13,4 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 10000
 
-CMD sh -c "printf 'window.__APP_CONFIG__ = { GOOGLE_CLIENT_ID: \"%s\" };' \"${GOOGLE_CLIENT_ID:-$VITE_GOOGLE_CLIENT_ID}\" > /usr/share/nginx/html/config.js && nginx -g 'daemon off;'"
+CMD sh -c "CLIENT_ID=\"${GOOGLE_CLIENT_ID:-$VITE_GOOGLE_CLIENT_ID}\"; if [ -n \"$CLIENT_ID\" ]; then printf 'window.__APP_CONFIG__ = { GOOGLE_CLIENT_ID: \"%s\" };' \"$CLIENT_ID\" > /usr/share/nginx/html/config.js; fi; nginx -g 'daemon off;'"

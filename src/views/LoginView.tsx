@@ -1,13 +1,14 @@
 import type { RefObject } from 'react';
-import { Box, Button, Container, Paper, Stack, Typography } from '@mui/material';
+import { Alert, Box, Button, Container, Paper, Stack, Typography } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 
 interface LoginViewProps {
   clientId: string;
+  scriptReady: boolean;
   googleButtonRef: RefObject<HTMLDivElement | null>;
 }
 
-export default function LoginView({ clientId, googleButtonRef }: LoginViewProps) {
+export default function LoginView({ clientId, scriptReady, googleButtonRef }: LoginViewProps) {
   return (
     <Box
       sx={{
@@ -59,9 +60,20 @@ export default function LoginView({ clientId, googleButtonRef }: LoginViewProps)
               </Typography>
             </Box>
 
+            {!clientId && (
+              <Alert severity="warning">
+                Google login needs a client ID. Set GOOGLE_CLIENT_ID in Render or
+                VITE_GOOGLE_CLIENT_ID locally.
+              </Alert>
+            )}
+
             <Box sx={{ minHeight: 44 }}>
-              {clientId ? (
+              {clientId && scriptReady ? (
                 <Box ref={googleButtonRef} />
+              ) : clientId ? (
+                <Button disabled fullWidth size="large" variant="contained" startIcon={<GoogleIcon />}>
+                  Loading Google sign-in
+                </Button>
               ) : (
                 <Button disabled fullWidth size="large" variant="contained" startIcon={<GoogleIcon />}>
                   Continue with Google
