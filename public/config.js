@@ -1,3 +1,3 @@
 window.__APP_CONFIG__ = {
-  GOOGLE_CLIENT_ID: ""
+  GOOGLE_CLIENT_ID: "548040968189-cph5ms55uck19iao891me1dq5q0usa82.apps.googleusercontent.com"
 };
