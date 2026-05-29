@@ -45,12 +45,12 @@ export default function LoginView({ clientId, scriptReady, googleButtonRef }: Lo
                 fontWeight: 800,
               }}
             >
-              F
+              S
             </Box>
 
             <Box>
               <Typography color="primary" fontSize={13} fontWeight={800} sx={{ mb: 1 }}>
-                Flova
+                Ser Salud
               </Typography>
               <Typography variant="h4" fontWeight={800} gutterBottom>
                 Welcome back
