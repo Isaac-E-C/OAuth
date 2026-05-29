@@ -59,10 +59,10 @@ export default function MenuView({ user, therapies, onLogout }: MenuViewProps) {
       >
         <Toolbar sx={{ gap: 1.5, minHeight: 82 }}>
           <Avatar variant="rounded" sx={{ bgcolor: 'primary.main', fontWeight: 800 }}>
-            F
+            S
           </Avatar>
           <Typography variant="h6" fontWeight={800}>
-            Flova
+            Ser Salud
           </Typography>
         </Toolbar>
         <Divider />
